@@ -17,11 +17,11 @@ popd
 mkdir -p magisk/zygisk
 for arch in arm64-v8a armeabi-v7a x86 x86_64
 do
-    cp "zygisk/libs/$arch/libmipushfake.so" "magisk/zygisk/$arch.so"
+    cp "zygisk/libs/$arch/libdevicefaker.so" "magisk/zygisk/$arch.so"
 done
 
 pushd magisk
 version="$(grep '^version=' module.prop  | cut -d= -f2)"
-rm -f "../mipushfake-zygisk-$version.zip" 
-zip -r9 "../mipushfake-zygisk-$version.zip" .
+rm -f "../devicefaker-zygisk-$version.zip" 
+zip -r9 "../devicefaker-zygisk-$version.zip" .
 popd

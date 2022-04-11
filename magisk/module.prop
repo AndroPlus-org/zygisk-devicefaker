@@ -1,6 +1,6 @@
-id=mipushfake
-name=MiPushFake for Zygisk
-version=v0.29
-versionCode=20201
-author=skyrmoin
-description=MiPushFake for Zygisk
+id=devicefaker-zygisk
+name=Zygisk Device Faker
+version=v01
+versionCode=1
+author=AndroPlus
+description=Zygisk module to disguise as if the device is Glaxy Tab S7 only for certain apps

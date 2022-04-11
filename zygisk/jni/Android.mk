@@ -1,7 +1,7 @@
 LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
-LOCAL_MODULE := mipushfake
+LOCAL_MODULE := devicefaker
 LOCAL_SRC_FILES := module.cpp config.cpp hook.cpp android.cpp
 LOCAL_STATIC_LIBRARIES := libcxx libxhook
 LOCAL_LDLIBS := -llog

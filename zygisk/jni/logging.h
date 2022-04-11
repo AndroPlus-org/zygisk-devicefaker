@@ -5,7 +5,7 @@
 #include "android/log.h"
 
 #ifndef LOG_TAG
-#define LOG_TAG    "MiPushFake"
+#define LOG_TAG    "DeviceFaker"
 #endif
 
 #ifdef DEBUG

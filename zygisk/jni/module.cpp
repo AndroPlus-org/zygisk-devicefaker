@@ -16,9 +16,9 @@ using zygisk::Api;
 using zygisk::AppSpecializeArgs;
 using zygisk::ServerSpecializeArgs;
 
-static constexpr auto CONFIG_PATH = "/data/adb/modules/mipushfake/config";
+static constexpr auto CONFIG_PATH = "/data/adb/modules/devicefaker/config";
 
-class MiPushFakeModule : public zygisk::ModuleBase {
+class DeviceFakerModule : public zygisk::ModuleBase {
 public:
     void onLoad(Api *api, JNIEnv *env) override {
         this->api = api;
@@ -127,7 +127,7 @@ private:
 
     void preSpecialize(const char *package) {
 		if(Config::Packages::Find(package) == false) {
-			LOGD("mipushfake: preSpecialize: package=[%s]", package);
+			LOGD("devicefaker: preSpecialize: package=[%s]", package);
 
         	api->setOption(zygisk::Option::DLCLOSE_MODULE_LIBRARY);
 			hook = false;
@@ -154,21 +154,33 @@ private:
 			return;
 		}
 
-		jstring new_str = env->NewStringUTF("Xiaomi");
+		jstring new_brand = env->NewStringUTF("samsung");
+		jstring new_product = env->NewStringUTF("gts7l");
+		jstring new_model = env->NewStringUTF("SM-T875");
 
 		jfieldID brand_id = env->GetStaticFieldID(build_class, "BRAND", "Ljava/lang/String;");
 		if (brand_id != nullptr) {
-			env->SetStaticObjectField(build_class, brand_id, new_str);
+			env->SetStaticObjectField(build_class, brand_id, new_brand);
 		}
 
 		jfieldID manufacturer_id = env->GetStaticFieldID(build_class, "MANUFACTURER", "Ljava/lang/String;");
 		if (manufacturer_id != nullptr) {
-			env->SetStaticObjectField(build_class, manufacturer_id, new_str);
+			env->SetStaticObjectField(build_class, manufacturer_id, new_brand);
 		}
 
 		jfieldID product_id = env->GetStaticFieldID(build_class, "PRODUCT", "Ljava/lang/String;");
 		if (product_id != nullptr) {
-			env->SetStaticObjectField(build_class, product_id, new_str);
+			env->SetStaticObjectField(build_class, product_id, new_product);
+		}
+
+		jfieldID device_id = env->GetStaticFieldID(build_class, "DEVICE", "Ljava/lang/String;");
+		if (device_id != nullptr) {
+			env->SetStaticObjectField(build_class, device_id, new_product);
+		}
+
+		jfieldID model_id = env->GetStaticFieldID(build_class, "MODEL", "Ljava/lang/String;");
+		if (model_id != nullptr) {
+			env->SetStaticObjectField(build_class, model_id, new_model);
 		}
 
 
@@ -177,7 +189,9 @@ private:
 			env->ExceptionClear();
 		}
 
-		env->DeleteLocalRef(new_str);
+		env->DeleteLocalRef(new_brand);
+		env->DeleteLocalRef(new_product);
+		env->DeleteLocalRef(new_model);
 	}
 
 
@@ -225,4 +239,4 @@ static void companionHandler(int remote_fd) {
 }
 
 REGISTER_ZYGISK_COMPANION(companionHandler)
-REGISTER_ZYGISK_MODULE(MiPushFakeModule)
+REGISTER_ZYGISK_MODULE(DeviceFakerModule)
