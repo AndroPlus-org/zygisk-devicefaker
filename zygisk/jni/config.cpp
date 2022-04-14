@@ -74,9 +74,5 @@ void Config::Load(std::vector<char> config) {
 	}
 	LOGD("Config::Load app list loaded.");
 
-	Properties::Put("ro.product.manufacturer", "Xiaomi");
-	Properties::Put("ro.product.brand", "Xiaomi");
-	Properties::Put("ro.product.name", "Xiaomi");
-
 }
 

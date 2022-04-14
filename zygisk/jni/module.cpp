@@ -136,7 +136,7 @@ private:
 		hook = true;
 
 	 	// Force DenyList unmounting for all GMS processes
-        api->setOption(zygisk::FORCE_DENYLIST_UNMOUNT);
+		api->setOption(zygisk::FORCE_DENYLIST_UNMOUNT);
 
 
     }
